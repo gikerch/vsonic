@@ -145,7 +145,7 @@ def SendEmail(to_list):
     #---这是附件部分---
     # xlsx类型附件
     part = MIMEApplication(open(u'JD显示器数据.xls', 'rb').read())
-    part.add_header('Content-Disposition', 'attachment', filename="jd显示器排名.xls".encode('gb2312'))
+    part.add_header('Content-Disposition', 'attachment', filename="jd.xls")
     msg.attach(part)
 
     # jpg类型附件
@@ -174,7 +174,7 @@ def SendEmail(to_list):
 
 # 获取通用的cookies字符串
 cookies, cookiesk = get_global_cookies()
-print '第6页cookies获取成功'
+print u'第6页cookies获取成功'
 
 # 检测是否成功访问到第6页
 url = get_page(
@@ -295,12 +295,14 @@ for m in range(len(name)):
 print n
 
 # 保存到excle
+date = time.strftime('%Y年%m月%d日')
 print u'保存到文件'
-wb.save(u'JD显示器数据.xls')
+wb.save(u'JD显示器排名%s.xls' %date)
+#　wb.save(u'E:\历史数据\京东显示器每日排名\JD显示器排名%s.xls' %date)
 print 'well done!'
 
 # 发送邮件
-to_list = ["491315091@qq.com","693610802@qq.com"]
+to_list = ["491315091@qq.com"]
 re = SendEmail(to_list)
 print re
 
